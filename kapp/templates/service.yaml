@@ -10,8 +10,8 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
+      targetPort: {{ .Values.service.targetPort | "http" }}
+      protocol: {{ .Values.service.protocol | "TCP" }}
       name: http
   selector:
     {{- include "kapp.selectorLabels" . | nindent 4 }}

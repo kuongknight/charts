@@ -41,14 +41,14 @@ spec:
           {{- if .Values.service.enabled }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
-              protocol: TCP
+              containerPort: {{ .Values.service.targetPort }}
+              protocol: {{ .Values.service.protocol | default "TCP" }}
           {{- end }}
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: {{ .Values.service.targetPort }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
@@ -59,7 +59,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: {{ .Values.service.targetPort }}
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}

@@ -36,6 +36,9 @@ spec:
           {{- if .Values.command }}
           command: {{ .Values.command }}
           {{- end }}
+          {{- if .Values.commandArgs }}
+          args: {{ .Values.commandArgs }}
+          {{- end }}
           env:
             {{- range .Values.extraEnvs }}
             - name: {{ .name | quote }}

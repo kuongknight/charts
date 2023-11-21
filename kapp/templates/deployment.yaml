@@ -42,6 +42,12 @@ spec:
             - name: {{ .name | quote }}
               value: {{ .value | quote }}
             {{- end }}
+            {{- if .Values.image.tag }}
+            - name: GIT_COMMIT
+              value: {{ .Values.image.tag | quote }}
+            {{- end }}
+            - name: NEW_RELIC_IGNORING_RULES
+              value: "/_healthcheck,/_liveness"
           {{- if .Values.service.enabled }}
           ports:
             - name: http

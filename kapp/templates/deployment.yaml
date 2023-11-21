@@ -43,7 +43,7 @@ spec:
               value: {{ .value | quote }}
             {{- end }}
             {{- if .Values.image.tag }}
-            - name: GIT_COMMIT
+            - name: VERSION_TAG
               value: {{ .Values.image.tag | quote }}
             {{- end }}
             - name: NEW_RELIC_IGNORING_RULES

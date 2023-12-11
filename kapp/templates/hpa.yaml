@@ -13,17 +13,17 @@ spec:
     name: {{ $fullName }}
   behavior:
     scaleDown:
-      stabilizationWindowSeconds: 300
+      stabilizationWindowSeconds: 30
       policies:
       - type: Percent
         value: 100
         periodSeconds: 15
     scaleUp:
-      stabilizationWindowSeconds: 300
+      stabilizationWindowSeconds: 180
       policies:
       - type: Pods
-        value: 2
-        periodSeconds: 300
+        value: 1
+        periodSeconds: 120
       selectPolicy: Max
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
@@ -36,6 +36,14 @@ spec:
           type: Utilization
           averageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
     {{- end }}
+    {{- if .Values.autoscaling.targetCPU }}
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: AverageValue
+          averageValue: {{ .Values.autoscaling.targetCPU }}
+    {{- end }}
     {{- if .Values.autoscaling.targetMemoryUtilizationPercentage }}
     - type: Resource
       resource:
@@ -43,5 +51,13 @@ spec:
         target:
           type: Utilization
           averageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.autoscaling.targetMemory }}
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: AverageValue
+          averageValue: {{ .Values.autoscaling.targetMemory }}
     {{- end }}
 {{- end }}

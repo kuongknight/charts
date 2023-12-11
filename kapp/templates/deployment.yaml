@@ -4,6 +4,7 @@ metadata:
   name: {{ include "kapp.fullname" . }}
   labels:
     {{- include "kapp.labels" . | nindent 4 }}
+    name: {{ include "kapp.fullname" . }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -82,10 +83,31 @@ spec:
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.affinity }}
       affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            preference:
+              matchExpressions:
+              - key: eks.amazonaws.com/capacityType
+                operator: In
+                values:
+                {{- if .Values.autoscaling.enabled }}
+                  - ON_DEMAND
+                {{- else }}
+                  - SPOT
+                {{- end }}
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: "name"
+                      operator: In
+                      values:
+                      - {{ include "kapp.fullname" . }}
+                topologyKey: "kubernetes.io/hostname"
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}

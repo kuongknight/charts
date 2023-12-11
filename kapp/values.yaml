@@ -93,12 +93,13 @@ resources: {}
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
+  maxReplicas: 10
+  # targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
+  # targetCPU: 2000m
+  # targetMemory: 2Gi
 
 nodeSelector: {}
 
 tolerations: []
 
-affinity: {}

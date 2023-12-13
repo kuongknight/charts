@@ -47,6 +47,8 @@ spec:
             - name: VERSION_TAG
               value: {{ .Values.image.tag | quote }}
             {{- end }}
+            - name: APP_VARIANT
+              value: {{ .Values.variant | default "latest" | quote }}
             - name: NEW_RELIC_IGNORING_RULES
               value: "/_healthcheck,/_liveness"
           {{- if .Values.service.enabled }}

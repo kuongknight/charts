@@ -1,3 +1,4 @@
+{{- $rollme := randAlphaNum 12}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,7 +20,7 @@ spec:
       {{- end }}
       labels:
         {{- include "kapp.selectorLabels" . | nindent 8 }}
-        app.kubernetes.io/component: {{ include "kapp.fullname" . }}
+        rollme: {{ $rollme | quote }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -103,10 +104,10 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchExpressions:
-              - key: "app.kubernetes.io/component"
+              - key: "rollme"
                 operator: In
                 values:
-                - {{ include "kapp.fullname" . }}
+                - {{ $rollme | quote }}
             topologyKey: "kubernetes.io/hostname"
       {{- with .Values.tolerations }}
       tolerations:

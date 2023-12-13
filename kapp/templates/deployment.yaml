@@ -4,7 +4,6 @@ metadata:
   name: {{ include "kapp.fullname" . }}
   labels:
     {{- include "kapp.labels" . | nindent 4 }}
-    name: {{ include "kapp.fullname" . }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -30,6 +29,8 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
+          labels:
+            app.kubernetes.io/component: {{ include "kapp.fullname" . }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -103,7 +104,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchExpressions:
-              - key: "name"
+              - key: "app.kubernetes.io/component"
                 operator: In
                 values:
                 - {{ include "kapp.fullname" . }}

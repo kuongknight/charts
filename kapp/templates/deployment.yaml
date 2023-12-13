@@ -88,7 +88,7 @@ spec:
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 99
+          - weight: 10
             preference:
               matchExpressions:
               - key: eks.amazonaws.com/capacityType
@@ -101,15 +101,13 @@ spec:
                 {{- end }}
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: "name"
-                      operator: In
-                      values:
-                      - {{ include "kapp.fullname" . }}
-                topologyKey: "kubernetes.io/hostname"
+          - labelSelector:
+              matchExpressions:
+                - key: "name"
+                  operator: In
+                  values:
+                  - {{ include "kapp.fullname" . }}
+            topologyKey: "kubernetes.io/hostname"
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}

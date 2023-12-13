@@ -88,7 +88,7 @@ spec:
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
+          - weight: 99
             preference:
               matchExpressions:
               - key: eks.amazonaws.com/capacityType
@@ -100,7 +100,7 @@ spec:
                   - SPOT
                 {{- end }}
         podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
+          requiredDuringSchedulingIgnoredDuringExecution:
             - weight: 100
               podAffinityTerm:
                 labelSelector:

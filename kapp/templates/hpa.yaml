@@ -12,22 +12,20 @@ spec:
     kind: Deployment
     name: {{ $fullName }}
   behavior:
-    scaleDown:
-      stabilizationWindowSeconds: 300
-      policies:
-      - type: Percent
-        value: 100
-        periodSeconds: 15
-    scaleUp:
-      stabilizationWindowSeconds: 30
-      policies:
-      - type: Percent
-        value: 100
-        periodSeconds: 120
-      - type: Pods
-        value: 3
-        periodSeconds: 120
-      selectPolicy: Max
+    {{- toYaml (.Values.autoscaling.behavior | default (dict 
+      "scaleDown" (dict 
+        "stabilizationWindowSeconds" 300
+        "policies" (list (dict "type" "Percent" "value" 100 "periodSeconds" 15))
+      )
+      "scaleUp" (dict 
+        "stabilizationWindowSeconds" 15
+        "policies" (list 
+          (dict "type" "Percent" "value" 100 "periodSeconds" 120)
+          (dict "type" "Pods" "value" 3 "periodSeconds" 120)
+        )
+        "selectPolicy" "Max"
+      )
+    )) | nindent 4 }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

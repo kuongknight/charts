@@ -15,13 +15,12 @@ spec:
     {{- toYaml (.Values.autoscaling.behavior | default (dict 
       "scaleDown" (dict 
         "stabilizationWindowSeconds" 300
-        "policies" (list (dict "type" "Percent" "value" 100 "periodSeconds" 15))
+        "policies" (list (dict "type" "Percent" "value" 100 "periodSeconds" 60))
       )
       "scaleUp" (dict 
         "stabilizationWindowSeconds" 15
         "policies" (list 
           (dict "type" "Percent" "value" 100 "periodSeconds" 120)
-          (dict "type" "Pods" "value" 3 "periodSeconds" 120)
         )
         "selectPolicy" "Max"
       )

@@ -3,9 +3,9 @@ entries:
   kapp:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-12-18T13:19:39.097249+07:00"
+    created: "2025-12-18T13:25:00.920964+07:00"
     description: A Helm chart for Kubernetes
-    digest: 336f8b5c2ec7cfba67931536e01f42b42ba65d31b03c6eda1de3e73a0af1b686
+    digest: e2b64cbab349b91a518c1993fa5bced6ea9d08e8ae158e0349ba59015f07db10
     name: kapp
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 1.0.4
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-12-18T13:19:39.097014+07:00"
+    created: "2025-12-18T13:25:00.920751+07:00"
     description: A Helm chart for Kubernetes
     digest: 0bf712a46ac39a36c9df3d2a340a6eff6de1a51b336265d2f7130bf92773978e
     name: kapp
@@ -23,7 +23,7 @@ entries:
     version: 1.0.3
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-12-18T13:19:39.096761+07:00"
+    created: "2025-12-18T13:25:00.920526+07:00"
     description: A Helm chart for Kubernetes
     digest: 2ff4ea02a2bc4b63f4329fd6431c6e65545a9545b47ade97e5ce16c0578a476c
     name: kapp
@@ -33,7 +33,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-12-18T13:19:39.095414+07:00"
+    created: "2025-12-18T13:25:00.920299+07:00"
     description: A Helm chart for Kubernetes
     digest: a3315480c956e6f4f6682b19b06a0151530cc58af7bfe313b8d78bf4728b0f90
     name: kapp
@@ -43,7 +43,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-12-18T13:19:39.094907+07:00"
+    created: "2025-12-18T13:25:00.920066+07:00"
     description: A Helm chart for Kubernetes
     digest: e6686fcfe3a75f61ef80f34fa4ef9a31e63fae84b2210779fd7c6e7e4b6e4ec2
     name: kapp
@@ -53,7 +53,7 @@ entries:
     version: 1.0.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-12-18T13:19:39.094455+07:00"
+    created: "2025-12-18T13:25:00.919738+07:00"
     description: A Helm chart for Kubernetes
     digest: d986df04058c84ffc6598438bda2b0b0f9a2a9adeee71bf2e4a61d7fff07bb8f
     name: kapp
@@ -61,4 +61,4 @@ entries:
     urls:
     - kapp-0.1.0.tgz
     version: 0.1.0
-generated: "2025-12-18T13:19:39.09391+07:00"
+generated: "2025-12-18T13:25:00.919315+07:00"

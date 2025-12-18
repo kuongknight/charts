@@ -103,3 +103,10 @@ nodeSelector: {}
 
 tolerations: []
 
+
+pdb:
+  enabled: false
+  # One of the following should be set; if neither is set, the template defaults to minAvailable: 1
+  # minAvailable: 1
+  # maxUnavailable: 1
+  annotations: {}

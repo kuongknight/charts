@@ -45,6 +45,14 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+# Holds off liveness and readiness until the app has started: up to
+# periodSeconds * failureThreshold (default 3 min). With it on, liveness/readiness
+# need no initialDelaySeconds.
+startupProbe:
+  enabled: false
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 36
 livenessProbe:
   enabled: false
   initialDelaySeconds: 600
@@ -59,6 +67,10 @@ readinessProbe:
   timeoutSeconds: 5
   failureThreshold: 6
   successThreshold: 2
+
+# Time between SIGTERM and SIGKILL; null keeps the Kubernetes default (30s). Raise it for
+# apps that finish in-flight work on SIGTERM (e.g. SQS consumers).
+terminationGracePeriodSeconds: null
 
 service:
   enabled: true

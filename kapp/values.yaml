@@ -4,6 +4,10 @@
 
 replicaCount: 1
 variant: latest
+# Random pod label on every render, so each deploy restarts the pods even when the image tag
+# is unchanged (mutable tags with pullPolicy Always). Turn off for GitOps (Argo CD): it makes
+# the app always OutOfSync and every sync a rollout; an immutable tag change rolls out anyway.
+rollme: true
 image:
   repository: nginx
   pullPolicy: IfNotPresent

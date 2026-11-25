@@ -20,7 +20,9 @@ spec:
       {{- end }}
       labels:
         {{- include "kapp.selectorLabels" . | nindent 8 }}
+        {{- if .Values.rollme }}
         rollme: {{ $rollme | quote }}
+        {{- end }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
